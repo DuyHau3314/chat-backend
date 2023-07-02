@@ -65,7 +65,7 @@ export class ChattyServer {
   }
 
   private globalErrorHandler(app: Application): void {
-    app.all('*', async (req: Request, res: Response, next: NextFunction) => {
+    app.all('*', async (req: Request, res: Response) => {
       res.status(HTTP_STATUS.NOT_FOUND).json({
         message: `${req.originalUrl} not found`
       });
