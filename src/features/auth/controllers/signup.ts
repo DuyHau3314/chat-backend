@@ -13,7 +13,7 @@ import { IUserDocument } from '@user/interfaces/user.interface';
 import { UserCache } from '@services/redis/user.cache';
 import { config } from '@root/config';
 import { authQueue } from '@services/queues/auth.queue';
-import { userQueue } from '@services/queues/user.queues';
+import { userQueue } from '@services/queues/user.queue';
 import JWT from 'jsonwebtoken';
 
 const userCache: UserCache = new UserCache();
