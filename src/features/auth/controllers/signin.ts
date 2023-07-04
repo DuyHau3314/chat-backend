@@ -7,8 +7,13 @@ import { BadRequestError } from '@globals/helpers/error-handler';
 import { authService } from '@services/db/auth.service';
 import { Request, Response } from 'express';
 import { config } from '@root/config';
-import { IUserDocument } from '@user/interfaces/user.interface';
+import { IResetPasswordParams, IUserDocument } from '@user/interfaces/user.interface';
 import { userService } from '@services/db/user.service';
+import { forgotPasswordTemplate } from '@services/emails/templates/forgot-pasword/forgot-password-template';
+import { emailQueue } from '@services/queues/email.queue';
+import moment from 'moment';
+import publicIp from 'ip';
+import { resetPasswordTemplate } from '@services/emails/templates/reset-password/reset-password-template';
 
 export class SignIn {
   @joiValidation(loginSchema)
@@ -35,6 +40,21 @@ export class SignIn {
       config.JWT_TOKEN!
     );
     req.session = { jwt: userJwt };
+
+    const templateParams: IResetPasswordParams = {
+      username: existingUser.username,
+      email: existingUser.email,
+      ipaddress: publicIp.address(),
+      date: moment().format('MMMM Do YYYY, h:mm:ss a')
+    };
+    const template: string = resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
+
+    emailQueue.addEmailJob('forgotPasswordEmail', {
+      template,
+      receiverEmail: 'karlee9@ethereal.email',
+      subject: 'Password reset confirmation'
+    });
+
     const userDocument: IUserDocument = {
       ...user,
       authId: existingUser!._id,

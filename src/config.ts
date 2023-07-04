@@ -16,6 +16,10 @@ class Config {
   public CLOUD_NAME = '';
   public CLOUD_API_KEY = '';
   public CLOUD_API_SECRET = '';
+  public SENDER_EMAIL = '';
+  public SENDER_EMAIL_PASSWORD = '';
+  // public SENDGRID_API_KEY = '';
+  // public SENDGRID_SENDER = '';
 
   private readonly DEFAULT_DATABASE_URL = 'mongodb://localhost:27017/chattyapp-backend';
 
@@ -31,6 +35,10 @@ class Config {
     this.CLOUD_NAME = process.env.CLOUD_NAME || '';
     this.CLOUD_API_KEY = process.env.CLOUD_API_KEY || '';
     this.CLOUD_API_SECRET = process.env.CLOUD_API_SECRET || '';
+    this.SENDER_EMAIL = process.env.SENDER_EMAIL || '';
+    this.SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD || '';
+    // this.SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || '';
+    // this.SENDGRID_SENDER = process.env.SENDGRID_SENDER || '';
   }
 
   public createLogger(name: string): bunyan {

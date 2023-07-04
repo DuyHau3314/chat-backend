@@ -30,6 +30,26 @@ Accept: application/json
 withCredentials: true
 
 
+###
+POST {{baseUrl}}/{{urlPath}}/forgot-password
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "email": "hau2@gmail.com"
+}
+
+###
+POST {{baseUrl}}/{{urlPath}}/reset-password/89b8c55714cb9cce04940e88cb13f07130114612
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "password": "12345678",
+  "confirmPassword": "12345678"
+}
 
 ###
 POST {{baseUrl}}/{{urlPath}}/signup
