@@ -6,12 +6,10 @@ import { ExpressAdapter } from '@bull-board/express';
 import { config } from '@root/config';
 import { IAuthJob } from '@auth/interfaces/auth.interface';
 import { IEmailJob, IUserJob } from '@user/interfaces/user.interface';
-// import { IPostJobData } from '@post/interfaces/post.interface';
-// import { IReactionJob } from '@reaction/interfaces/reaction.interface';
+import { IPostJobData } from '@post/interfaces/post.interface';
+import { IReactionJob } from '@reaction/interfaces/reaction.interface';
 
-// type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJobData | IReactionJob;
-
-type IBaseJobData = IAuthJob | IUserJob | IEmailJob;
+type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJobData | IReactionJob;
 
 const bullAdapters: { [key: string]: BullAdapter } = {};
 
