@@ -31,7 +31,9 @@
     "paths": {
       "@globals/*": ["src/shared/globals/*"],
       "@auth/*": ["src/features/auth/*"],
+      "@post/*": ["src/features/post/*"],
       "@user/*": ["src/features/user/*"],
+      "@reaction/*": ["src/features/reaction/*"],
       "@services/*": ["src/shared/services/*"],
       "@sockets/*": ["src/shared/sockets/*"],
       "@workers/*": ["src/shared/workers/*"],
