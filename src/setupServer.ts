@@ -123,7 +123,6 @@ export class ChattyServer {
     const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
     const notificationSocketHandler: SocketIONotificationHandler = new SocketIONotificationHandler();
 
-
     postSocketHandler.listen();
     notificationSocketHandler.listen(io);
   }
