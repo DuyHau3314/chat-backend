@@ -34,6 +34,8 @@
       "@post/*": ["src/features/post/*"],
       "@user/*": ["src/features/user/*"],
       "@reaction/*": ["src/features/reaction/*"],
+      "@comment/*": ["src/features/comments/*"],
+      "@notification/*": ["src/features/notification/*"],
       "@services/*": ["src/shared/services/*"],
       "@sockets/*": ["src/shared/sockets/*"],
       "@workers/*": ["src/shared/workers/*"],
