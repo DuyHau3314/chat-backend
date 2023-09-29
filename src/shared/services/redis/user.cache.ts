@@ -2,10 +2,11 @@ import { ServerError } from '@globals/helpers/error-handler';
 import { Helpers } from '@globals/helpers/helpers';
 import { config } from '@root/config';
 import { BaseCache } from '@services/redis/base.cache';
-import { IUserDocument } from '@user/interfaces/user.interface';
+import { INotificationSettings, ISocialLinks, IUserDocument } from '@user/interfaces/user.interface';
 import Logger from 'bunyan';
 
 const log: Logger = config.createLogger('userCache');
+type UserItem = string | ISocialLinks | INotificationSettings;
 
 export class UserCache extends BaseCache {
   constructor() {
@@ -102,4 +103,19 @@ export class UserCache extends BaseCache {
       throw new ServerError('Server error. Try again.');
     }
   }
+
+  public async updateSingleUserItemInCache(userId: string, prop: string, value: UserItem): Promise<IUserDocument | null> {
+    try {
+      if (!this.client.isOpen) {
+        await this.client.connect();
+      }
+      await this.client.HSET(`users:${userId}`, `${prop}`, JSON.stringify(value));
+      const response: IUserDocument = (await this.getUserFromCache(userId)) as IUserDocument;
+      return response;
+    } catch (error) {
+      log.error(error);
+      throw new ServerError('Server error. Try again.');
+    }
+  }
+
 }
